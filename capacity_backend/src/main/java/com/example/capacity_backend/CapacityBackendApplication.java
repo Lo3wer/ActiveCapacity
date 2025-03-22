@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CapacityBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CapacityBackendApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(CapacityBackendApplication.class, args);
+    }
 }
