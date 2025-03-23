@@ -13,10 +13,18 @@ const ServiceView: React.FC<ServiceViewProps> = ({
 }) => {
   results = [
     {
+      id: "123",
       name: "ARC",
-      type: "Gym",
-      location: "UBC",
-      address: "6138 Student Union Blvd Vancouver, BC V6T 1Z1",
+      currentOccupancy: 50,
+      totalCapacity: 80,
+      location: {
+        street: "6000 Student Union Blvd",
+        city: "Vancouver, BC",
+        postal: "V6T 1Z1",
+        latitude: 49.2606,
+        longitude: -123.246,
+      },
+      owner: "UBC Recreation",
       hours: [
         { open: "06:30", close: "22:00" },
         { open: "06:30", close: "22:00" },
@@ -26,12 +34,23 @@ const ServiceView: React.FC<ServiceViewProps> = ({
         { open: "10:00", close: "20:00" },
         { open: "10:00", close: "20:00" },
       ],
+      link: "https://www.recreation.ubc.ca/",
+      type: "GYM",
+      isOpen: true,
     },
     {
+      id: "432",
       name: "Birdcoop",
       type: "Gym",
-      location: "UBC",
-      address: "6000 Student Union Blvd Vancouver, BC V6T 1Z1",
+      location: {
+        street: "6000 Student Union Blvd",
+        city: "Vancouver, BC",
+        postal: "V6T 1Z1",
+        latitude: 49.2606,
+        longitude: -123.246,
+      },
+      currentCapacity: 65,
+      totalCapacity: 80,
       hours: [
         { open: "06:30", close: "23:00" },
         { open: "06:30", close: "23:00" },
@@ -41,14 +60,16 @@ const ServiceView: React.FC<ServiceViewProps> = ({
         { open: "09:00", close: "22:00" },
         { open: "09:00", close: "22:00" },
       ],
+      link: "https://www.recreation.ubc.ca/",
+      isOpen: true,
     },
   ];
 
   return (
-    <div className="space-y-4 min-w-md max-w-xl bg-neutral-200 rounded-lg">
+    <div className="space-y-4 min-w-md max-w-xl shadow rounded-lg">
       <div className="flex justify-between text-lg font-medium pr-27 bg-neutral-950 pl-10 py-4 rounded-lg text-white">
         <p className="flex-1">Service</p>
-        <p className="flex-1">Location</p>
+        <p className="flex-1">City</p>
       </div>
       <div className="px-10 py-4">
         {results.length === 0 ? (
@@ -60,7 +81,9 @@ const ServiceView: React.FC<ServiceViewProps> = ({
                 <p className="text-lg font-semibold">{item.name}</p>
                 <p className="text-sm text-gray-600">{item.type}</p>
               </div>
-              <p className="flex-1 text-sm text-gray-600">{item.location}</p>
+              <p className="flex-1 text-sm text-gray-600">
+                {item.location.city}
+              </p>
               <Button
                 onClick={() => onSelectService(item)} // Use a unique identifier (e.g., `id`) for edit
                 variant={"link"}

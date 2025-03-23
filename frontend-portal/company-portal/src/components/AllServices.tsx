@@ -10,11 +10,18 @@ interface OperationalHours {
 }
 
 export interface ServiceItem {
+  id: string;
   name: string;
   type: string;
-  location: string;
-  address: string;
   hours: OperationalHours[];
+  totalCapacity: number;
+  location: {
+    street: string;
+    city: string;
+    postal: string;
+    latitude: number;
+    longitude: number;
+  };
   [key: string]: any; // Catch-all for extra fields
 }
 
