@@ -4,13 +4,29 @@ import React, { useState, useEffect } from "react";
 import ServiceViewSearch from "./ServiceViewSearch";
 import ServiceView from "./ServiceView";
 
+interface OperationalHours {
+  open: string;
+  close: string;
+}
+
 export interface ServiceItem {
   name: string;
   type: string;
+  location: string;
+  address: string;
+  hours: OperationalHours[];
   [key: string]: any; // Catch-all for extra fields
 }
 
-const AllServices = () => {
+interface AllServicesProps {
+  onSelectService: (service: ServiceItem) => void; // Callback to send service up
+  refreshKey: number;
+}
+
+const AllServices: React.FC<AllServicesProps> = ({
+  onSelectService,
+  refreshKey,
+}) => {
   const [fullData, setFullData] = useState<ServiceItem[]>([]); // Store all data from backend
   const [filteredData, setFilteredData] = useState<ServiceItem[]>([]); // Displayed data
 
@@ -32,7 +48,7 @@ const AllServices = () => {
     };
 
     fetchData();
-  }, []);
+  }, [refreshKey]);
 
   const handleSearch = (query: string) => {
     if (!query) {
@@ -52,11 +68,8 @@ const AllServices = () => {
   return (
     <div className="space-y-8 flex-1">
       <ServiceViewSearch onSearch={handleSearch} />
-      {filteredData.length == 0 ? (
-        <ServiceView results={fullData} />
-      ) : (
-        <ServiceView results={filteredData} />
-      )}
+
+      <ServiceView results={filteredData} onSelectService={onSelectService} />
     </div>
   );
 };

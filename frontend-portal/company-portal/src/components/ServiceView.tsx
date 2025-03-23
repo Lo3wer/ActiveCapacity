@@ -2,15 +2,46 @@ import React from "react";
 import { ServiceItem } from "./AllServices";
 import { Button } from "./ui/button";
 
-const ServiceView: React.FC<{ results: ServiceItem[] }> = ({ results }) => {
-  const handleEdit = (id: string) => {
-    // Handle the edit action, you can use this function for your edit logic
-    console.log("Editing item with id:", id);
-  };
+interface ServiceViewProps {
+  results: ServiceItem[];
+  onSelectService: (service: ServiceItem) => void;
+}
 
+const ServiceView: React.FC<ServiceViewProps> = ({
+  results,
+  onSelectService,
+}) => {
   results = [
-    { name: "ARC", type: "Gym", location: "UBC" },
-    { name: "Birdcoop", type: "Gym", location: "UBC" },
+    {
+      name: "ARC",
+      type: "Gym",
+      location: "UBC",
+      address: "6138 Student Union Blvd Vancouver, BC V6T 1Z1",
+      hours: [
+        { open: "06:30", close: "22:00" },
+        { open: "06:30", close: "22:00" },
+        { open: "06:30", close: "22:00" },
+        { open: "06:30", close: "22:00" },
+        { open: "06:30", close: "22:00" },
+        { open: "10:00", close: "20:00" },
+        { open: "10:00", close: "20:00" },
+      ],
+    },
+    {
+      name: "Birdcoop",
+      type: "Gym",
+      location: "UBC",
+      address: "6000 Student Union Blvd Vancouver, BC V6T 1Z1",
+      hours: [
+        { open: "06:30", close: "23:00" },
+        { open: "06:30", close: "23:00" },
+        { open: "06:30", close: "23:00" },
+        { open: "06:30", close: "23:00" },
+        { open: "06:30", close: "23:00" },
+        { open: "09:00", close: "22:00" },
+        { open: "09:00", close: "22:00" },
+      ],
+    },
   ];
 
   return (
@@ -31,7 +62,7 @@ const ServiceView: React.FC<{ results: ServiceItem[] }> = ({ results }) => {
               </div>
               <p className="flex-1 text-sm text-gray-600">{item.location}</p>
               <Button
-                onClick={() => handleEdit(item.name)} // Use a unique identifier (e.g., `id`) for edit
+                onClick={() => onSelectService(item)} // Use a unique identifier (e.g., `id`) for edit
                 variant={"link"}
                 className="text-blue-700"
               >

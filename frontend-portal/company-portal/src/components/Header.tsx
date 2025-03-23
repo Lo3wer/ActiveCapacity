@@ -15,7 +15,7 @@ const Header: React.FC<{ user: User }> = ({ user }) => {
           </Button>
         </Link>
 
-        <Button variant="ghost">Manage Facility</Button>
+        {/* <Button variant="ghost">Manage Facility</Button> */}
         <Button variant="ghost">Logout</Button>
       </div>
     </div>
