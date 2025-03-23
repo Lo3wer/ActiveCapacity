@@ -6,6 +6,7 @@ import TypeSelect from "@/components/ui/TypeSelect";
 import HeroSearch from "@/components/ui/HeroSearch";
 import Image from "next/image";
 import { gymContext } from "@/contexts/gymContext";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
 
@@ -34,6 +35,7 @@ export default function Home() {
       });
       const data = await response.json();
       setGyms(data);
+      console.log(data)
     }
 
     if (!navigator.geolocation) {
@@ -66,9 +68,11 @@ export default function Home() {
 
   return (
     <div className="flex flex-col p-4 w-full">
+      <h1 className="text-4xl font-bold text-center mt-[10%]">AtCapacity</h1>
       <gymContext.Provider value={{ gyms, setGyms }}>
-        <HeroSearch />
+        {/* <HeroSearch /> */}
         <TypeSelect location={location} />
+        <Footer />
       </gymContext.Provider>
     </div>
 
