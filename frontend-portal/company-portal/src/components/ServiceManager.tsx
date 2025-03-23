@@ -33,7 +33,7 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
 
   if (!formData) {
     return (
-      <div className="p-6 bg-white rounded-lg shadow-md min-w-[400px]">
+      <div className="p-6 bg-white rounded-lg shadow min-w-[400px]">
         <h2 className="text-2xl font-bold">No service selected</h2>
         <p className="text-gray-500">Select a service to view details.</p>
       </div>
@@ -41,8 +41,27 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
   }
 
   // Handle text field changes
-  const handleChange = (field: keyof ServiceItem, value: string) => {
+  const handleChange = (
+    field: keyof ServiceItem,
+    value: string | number | boolean
+  ) => {
     setFormData({ ...formData, [field]: value });
+  };
+
+  // Handle nested location field changes
+  const handleLocationChange = (
+    field: keyof ServiceItem["location"],
+    value: string | number
+  ) => {
+    if (formData) {
+      setFormData({
+        ...formData,
+        location: {
+          ...formData.location,
+          [field]: value,
+        },
+      });
+    }
   };
 
   // Handle hour changes
@@ -61,7 +80,7 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/services/${formData.name}`,
+        `http://localhost:8080/api/services/${formData.id}`,
         {
           method: "PUT",
           headers: {
@@ -83,7 +102,7 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md min-w-[400px]">
+    <div className="p-6 bg-white rounded-lg shadow min-w-[400px]">
       <h2 className="text-2xl font-bold mb-4">Edit Service</h2>
 
       <Label className="mt-4 mb-2">Name</Label>
@@ -98,17 +117,51 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
         onChange={(e) => handleChange("type", e.target.value)}
       />
 
-      <Label className="mt-4 mb-2">Location</Label>
+      <Label className="mt-4 mb-2">Owner</Label>
       <Input
-        value={formData.location}
-        onChange={(e) => handleChange("location", e.target.value)}
+        value={formData.owner}
+        onChange={(e) => handleChange("owner", e.target.value)}
       />
 
-      <Label className="mt-4 mb-2">Address</Label>
-      <Input
-        value={formData.address}
-        onChange={(e) => handleChange("address", e.target.value)}
-      />
+      {/* Location Fields */}
+      <div className="mt-4">
+        <h3 className="text-lg font-bold">Location</h3>
+        <Label className="mt-4 mb-2">Street</Label>
+        <Input
+          value={formData.location.street}
+          onChange={(e) => handleLocationChange("street", e.target.value)}
+        />
+
+        <Label className="mt-4 mb-2">City</Label>
+        <Input
+          value={formData.location.city}
+          onChange={(e) => handleLocationChange("city", e.target.value)}
+        />
+
+        <Label className="mt-4 mb-2">Postal Code</Label>
+        <Input
+          value={formData.location.postal}
+          onChange={(e) => handleLocationChange("postal", e.target.value)}
+        />
+
+        <Label className="mt-4 mb-2">Latitude</Label>
+        <Input
+          type="number"
+          value={formData.location.latitude}
+          onChange={(e) =>
+            handleLocationChange("latitude", Number(e.target.value))
+          }
+        />
+
+        <Label className="mt-4 mb-2">Longitude</Label>
+        <Input
+          type="number"
+          value={formData.location.longitude}
+          onChange={(e) =>
+            handleLocationChange("longitude", Number(e.target.value))
+          }
+        />
+      </div>
 
       {/* Hours Section */}
       <div className="mt-6">
@@ -133,6 +186,24 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
             />
           </div>
         ))}
+      </div>
+
+      {/* Link Field */}
+      <Label className="mt-4 mb-2">Link</Label>
+      <Input
+        value={formData.link}
+        onChange={(e) => handleChange("link", e.target.value)}
+      />
+
+      {/* Open Status */}
+      <div className="mt-6 flex justify-between items-center">
+        <Label>Open</Label>
+        <input
+          type="checkbox"
+          checked={formData.isOpen}
+          onChange={(e) => handleChange("isOpen", e.target.checked)}
+          className="h-5 w-5"
+        />
       </div>
 
       <div className="mt-6 flex justify-end">

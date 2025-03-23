@@ -112,7 +112,7 @@ const FacilityManager = () => {
   };
 
   return (
-    <div className="space-y-2 p-6 bg-white rounded-lg shadow justify-self-start mr-10">
+    <div className="space-y-2 p-6 bg-white rounded-lg shadow justify-self-start mr-10 h-fit">
       <h2 className="text-xl font-bold mb-4">Facility Details</h2>
 
       {renderField("Facility Name", "facilityName")}
