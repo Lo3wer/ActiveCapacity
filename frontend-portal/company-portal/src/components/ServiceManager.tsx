@@ -117,12 +117,6 @@ const ServiceManager: React.FC<ServiceManagerProps> = ({ service, onSave }) => {
         onChange={(e) => handleChange("type", e.target.value)}
       />
 
-      <Label className="mt-4 mb-2">Owner</Label>
-      <Input
-        value={formData.owner}
-        onChange={(e) => handleChange("owner", e.target.value)}
-      />
-
       {/* Location Fields */}
       <div className="mt-4">
         <h3 className="text-lg font-bold">Location</h3>
