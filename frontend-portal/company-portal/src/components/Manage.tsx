@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import FacilityManger from "./FacilityManager";
 import ServiceManger from "./ServiceManager";
+import { ServiceItem } from "./AllServices";
 
 export const FACILITY = "facility";
 export const SERVICE = "service";
@@ -8,13 +10,16 @@ export const SERVICE = "service";
 const Manage = ({
   session,
   service,
+  onSave,
 }: {
   session: string;
-  service?: string;
+  service: ServiceItem | null;
+  onSave: () => void;
 }) => {
   return (
-    <div className="flex-2 bg-neutral-200 rounded-lg min-h-160">
-      {session == FACILITY ? <FacilityManger /> : <ServiceManger />}
+    <div className="flex flex-row flex-2 rounded-lg min-h-160 justify-start">
+      <FacilityManger />
+      <ServiceManger service={service} onSave={onSave} />
     </div>
   );
 };

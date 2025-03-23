@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export interface User {
   name: string;
@@ -6,10 +7,10 @@ export interface User {
 
 const LogoCard: React.FC<{ user: User }> = ({ user }) => {
   return (
-    <div>
+    <Link href={"/"}>
       <h1 className="font-bold text-4xl">AtCapacity</h1>
       <div className="text-3xl">Company Portal - {user.name}</div>
-    </div>
+    </Link>
   );
 };
 
