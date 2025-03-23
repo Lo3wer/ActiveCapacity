@@ -1,0 +1,8 @@
+services:
+  - name: backend-service
+    type: web
+    env: docker
+    plan: free
+    dockerfilePath: backend/Dockerfile
+    buildCommand: docker build -t backend-app -f backend/Dockerfile backend/
+    startCommand: java -jar /capacity_backend.jar
