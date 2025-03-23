@@ -73,4 +73,13 @@ public class FacilityService {
     public void deleteFacility(String id) {
         facilityRepository.deleteById(id);
     }
+
+    // New methods for querying by address or owner
+    public List<Facility> getFacilitiesByOwner(String owner) {
+        return facilityRepository.findByOwner(owner);
+    }
+
+    public List<Facility> getFacilitiesByAddress(String address) {
+        return facilityRepository.findByAddress(address);
+    }
 }

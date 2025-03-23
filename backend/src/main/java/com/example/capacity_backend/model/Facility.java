@@ -11,15 +11,19 @@ public class Facility {
     private String name;
     private int currentOccupancy;
     private int totalCapacity;
+    private String address; // New field for address
+    private String owner;   // New field for owner (e.g., company/organization name)
     
     // Constructors
     public Facility() {
     }
     
-    public Facility(String name, int totalCapacity) {
+    public Facility(String name, int totalCapacity, String address, String owner) {
         this.name = name;
         this.currentOccupancy = 0;
         this.totalCapacity = totalCapacity;
+        this.address = address;
+        this.owner = owner;
     }
     
     // Getters and Setters
@@ -53,6 +57,22 @@ public class Facility {
     
     public void setTotalCapacity(int totalCapacity) {
         this.totalCapacity = totalCapacity;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public String getOwner() {
+        return owner;
+    }
+    
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
     
     // Business methods
