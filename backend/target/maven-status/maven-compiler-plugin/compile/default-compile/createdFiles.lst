@@ -1,7 +1,7 @@
-com/example/capacity_backend/model/Facility.class
-com/example/capacity_backend/repository/FacilityRepository.class
-com/example/capacity_backend/model/Address.class
-com/example/capacity_backend/controller/FacilityController.class
-com/example/capacity_backend/model/Location.class
-com/example/capacity_backend/service/FacilityService.class
-com/example/capacity_backend/CapacityBackendApplication.class
+com\example\capacity_backend\service\FacilityService.class
+com\example\capacity_backend\model\Address.class
+com\example\capacity_backend\model\Location.class
+com\example\capacity_backend\repository\FacilityRepository.class
+com\example\capacity_backend\controller\FacilityController.class
+com\example\capacity_backend\CapacityBackendApplication.class
+com\example\capacity_backend\model\Facility.class
