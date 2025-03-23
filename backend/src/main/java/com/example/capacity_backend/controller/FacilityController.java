@@ -79,4 +79,18 @@ public class FacilityController {
         facilityService.deleteFacility(id);
         return ResponseEntity.noContent().build();
     }
+
+    // New endpoint to get facilities by owner
+    @GetMapping("/owner/{owner}")
+    public ResponseEntity<List<Facility>> getFacilitiesByOwner(@PathVariable String owner) {
+        List<Facility> facilities = facilityService.getFacilitiesByOwner(owner);
+        return ResponseEntity.ok(facilities);
+    }
+
+    // New endpoint to get facilities by address
+    @GetMapping("/address/{address}")
+    public ResponseEntity<List<Facility>> getFacilitiesByAddress(@PathVariable String address) {
+        List<Facility> facilities = facilityService.getFacilitiesByAddress(address);
+        return ResponseEntity.ok(facilities);
+    }
 }
